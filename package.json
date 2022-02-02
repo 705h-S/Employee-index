@@ -1,0 +1,19 @@
+{
+  "name": "employee-index",
+  "version": "1.0.0",
+  "description": "Track Employees and roles thanks to mysql.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/705h-S/Employee-index.git"
+  },
+  "author": "Joshua Meza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/705h-S/Employee-index/issues"
+  },
+  "homepage": "https://github.com/705h-S/Employee-index#readme"
+}
