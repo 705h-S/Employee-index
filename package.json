@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/705h-S/Employee-index/issues"
   },
-  "homepage": "https://github.com/705h-S/Employee-index#readme"
+  "homepage": "https://github.com/705h-S/Employee-index#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.3"
+  }
 }
