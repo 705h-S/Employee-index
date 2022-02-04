@@ -25,5 +25,5 @@ VALUES ("Alexis", "Frost"),
        ("Daniela", "Olivares"),
        ("Bruce", "Wayne");
 
-SELECT * FROM employees_db.deparment;
+
 
