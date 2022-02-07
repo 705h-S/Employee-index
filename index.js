@@ -112,7 +112,7 @@ function prompts (){
             case "Quit_program":
                 console.log("Goodbye");
                 db.end();
-            break ;    
+            break ; 
         }
     } );
 };
@@ -216,6 +216,7 @@ function Addrole() {
         });   
 };
 
+// add employee
 function Aemployee() {
     
     inquirer.prompt([
@@ -270,9 +271,9 @@ function Aemployee() {
                     console.log(`Added ${answers.addEmN} to the list!`);
                     Vemployees();
                 });
-        });  
-        
+        });        
 };
+
 
 
 prompts()
