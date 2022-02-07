@@ -5,6 +5,7 @@ const db = require('./db/connection');
 const { printTable } = require('console-table-printer');
 
 var deps = [
+" ",    
 "Human Resources",
 "Finance",
 "Legal",
@@ -13,6 +14,7 @@ var deps = [
 "Engineering"
 ];
 var rolls = [
+    " ",
     "HR Manager",
     "Chief financial officer",
     "Assembly Supervisor",
@@ -184,20 +186,20 @@ function Addrole() {
             message: "What department does this role belong too?",
             choices: deps
         }
-        ])
-
-        
-        // .then(answers => {
-        //     db.query(
-        //         `INSERT INTO department (name)
-        //         VALUES ("${answers.addingDep}")`, function (err, res){
-        //             if(err){
-        //                 console.log(err)
-        //             };
-        //             console.log(`Added ${answers.addingDep} to the list!`);
-        //             Vdeparments();
-        //         });
-        // });   
+        ])  
+        .then(answers => {
+            rolls.push(`${answers.addRoleN}`);
+            var depid = deps.indexOf(`${answers.roleDep}`);
+            db.query(
+                `INSERT INTO roles (title, salary, department_id)
+                VALUES ("${answers.addRoleN}", "${answers.addRoleS}","${depid}" )`, function (err, res){
+                    if(err){
+                        console.log(err)
+                    };
+                    console.log(`Added ${answers.addRoleN} to the list!`);
+                    Vroles();
+                });
+        });   
 };
 
 
