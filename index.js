@@ -4,6 +4,27 @@ const express = require('express');
 const db = require('./db/connection');
 const { printTable } = require('console-table-printer');
 
+var deps = [
+"Human Resources",
+"Finance",
+"Legal",
+"Production",
+"Customer Service",
+"Engineering"
+];
+var rolls = [
+    "HR Manager",
+    "Chief financial officer",
+    "Assembly Supervisor",
+    "Chief Customer Service",
+    "senior Software Enineer",
+    "Lawyer",
+    "Recruiter",
+    "Accountant",
+    "Assembler",
+    "Support",
+    "Software Engineer",
+];
 
 function prompts (){
     inquirer.prompt([     
@@ -131,6 +152,7 @@ function Adeparment() {
         }
         ])
         .then(answers => {
+            deps.push(`${answers.addingDep}`)
             db.query(
                 `INSERT INTO department (name)
                 VALUES ("${answers.addingDep}")`, function (err, res){
@@ -141,6 +163,41 @@ function Adeparment() {
                     Vdeparments();
                 });
         });   
+};
+// adding role
+function Addrole() {
+    
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "addRoleN",
+            message: "What Role are we adding today?"
+        },
+        {
+            type: "input",
+            name:"addRoleS",
+            message: "What's the salary for this role?"
+        },
+        {
+            type: "list",
+            name: "roleDep",
+            message: "What department does this role belong too?",
+            choices: deps
+        }
+        ])
+
+        
+        // .then(answers => {
+        //     db.query(
+        //         `INSERT INTO department (name)
+        //         VALUES ("${answers.addingDep}")`, function (err, res){
+        //             if(err){
+        //                 console.log(err)
+        //             };
+        //             console.log(`Added ${answers.addingDep} to the list!`);
+        //             Vdeparments();
+        //         });
+        // });   
 };
 
 
