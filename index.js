@@ -42,17 +42,31 @@ function prompts (){
     ])
     .then ( answers =>{
         console.log(answers);
-        // if( answers.choice === "View_deparments"){
-        //     Vdeparments();
-        // }
         switch (answers.choice){
+
             case "View_deparments":
                 Vdeparments();
             break ;
+
             case "View_roles":
                 Vroles();
             break ;
+
+            case "View_employees":
+                Vemployees();
+            break ;
+
+            case "Add_deparment":
+                Adeparment();
+            break ;
+
+            case "Add_role":
+                Addrole();
+            break ;    
             
+            case "Add_employee":
+                Aemployee();
+            break ;    
         }
     } );
 };
