@@ -72,7 +72,7 @@ function prompts (){
     } );
 };
 
-// Functions after user selects option
+// display deparments
 function Vdeparments (){ 
     db.query (
     `SELECT name as Deparments
@@ -81,7 +81,7 @@ function Vdeparments (){
         console.log(err);
     })
 };
-
+// display roles
 function Vroles (){ 
     db.query (
     `SELECT roles.title, department.name AS Deparments, roles.salary  
@@ -91,10 +91,14 @@ function Vroles (){
         console.log(err);
     })
 };
-
+// display employees
 function Vemployees (){ 
     db.query (
-    "SELECT * FROM employees", function (err, res) {
+    `SELECT employees.id, CONCAT(employees.first_name," ",employees.last_name) AS Employee, roles.title, department.name AS Department, roles.salary, CONCAT(em.first_name," ",em.last_name) as Manager
+    FROM employees
+    JOIN roles ON employees.roles_id = roles.id
+    JOIN department ON roles.department_id = department.id
+    JOIN employees em ON employees.manager_id = em.id`, function (err, res) {
         printTable(res);
         console.log(err);
     })
