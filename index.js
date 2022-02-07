@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 const express = require('express');
 const db = require('./db/connection');
+const { printTable } = require('console-table-printer');
 
 
 function prompts (){
@@ -74,18 +75,30 @@ function prompts (){
 // Functions after user selects option
 function Vdeparments (){ 
     db.query (
-    "SELECT * FROM department", function (err, res) {
-        console.log(res);
+    `SELECT name as Deparments
+    FROM department`, function (err, res) {
+        printTable(res);
         console.log(err);
     })
-}
+};
 
 function Vroles (){ 
     db.query (
-    "SELECT * FROM roles", function (err, res) {
-        console.log(res);
+    `SELECT roles.title, department.name AS Deparments, roles.salary  
+    FROM roles
+    JOIN department ON roles.department_id = department.id`, function (err, res) {
+        printTable(res);
         console.log(err);
     })
-}
+};
+
+function Vemployees (){ 
+    db.query (
+    "SELECT * FROM employees", function (err, res) {
+        printTable(res);
+        console.log(err);
+    })
+};
+
 
 prompts()
