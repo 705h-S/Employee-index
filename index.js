@@ -27,6 +27,20 @@ var rolls = [
     "Support",
     "Software Engineer",
 ];
+var boss = [
+    " ",
+    "Alexis Frost",
+    "John Snow",
+    "Barry Allen", 
+    "Daniela Olivares", 
+    "Bruce Wayne", 
+    "Phoenix Wright", 
+    "Emily Straw",  
+    "Morty Sanchez", 
+    "BomBon Camacho", 
+    "Joshua Meza", 
+    "Dick Grayson", 
+];
 
 function prompts (){
     inquirer.prompt([     
@@ -200,6 +214,64 @@ function Addrole() {
                     Vroles();
                 });
         });   
+};
+
+function Aemployee() {
+    
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "addEmN",
+            message: "Please Enter Employees first name"
+        },
+        {
+            type: "input",
+            name:"addEmLn",
+            message: "What's the Employees last name?"
+        },
+        {
+            type: "list",
+            name: "emRole",
+            message: "What's the Employee's role?",
+            choices: rolls
+        },
+        {
+            type: "list",
+            name: "emDep",
+            message: "What department does this Employee belong too?",
+            choices: deps
+        },
+        {
+            type: "list",
+            name: "emBoss",
+            message: "Whos the employee's manager?",
+            choices: boss
+        }
+
+        ])  
+        .then(answers => {
+            var worker = (`${answers.addEmN}+" "+${answers.addEmLn}`)
+            boss.push(worker);
+            var rolly = rolls.indexOf(`${answers.emRole}`);
+             // if they dont have a boss
+        // function noBoss (){
+            var manager = boss.indexOf(`${answers.emBoss}`);
+            // if(manager !== 0){
+                // return "NULL";
+            // };
+            // return manager;
+            // };
+            db.query(
+                `INSERT INTO employees (first_name, last_name, roles_id, manager_id)
+                VALUES ("${answers.addEmN}", "${answers.addEmLn}", "${rolly}", "${manager}" )`, function (err, res){
+                    if(err){
+                        console.log(err)
+                    };
+                    console.log(`Added ${answers.addEmN} to the list!`);
+                    Vemployees();
+                });
+        });  
+        
 };
 
 
