@@ -94,11 +94,11 @@ function Vroles (){
 // display employees
 function Vemployees (){ 
     db.query (
-    `SELECT employees.id, CONCAT(employees.first_name," ",employees.last_name) AS Employee, roles.title, department.name AS Department, roles.salary, CONCAT(em.first_name," ",em.last_name) as Manager
+    `SELECT employees.id, CONCAT(employees.first_name," ",employees.last_name) AS Employee, roles.title AS Role, department.name AS Department, roles.salary, CONCAT(em.first_name," ",em.last_name) as Manager
     FROM employees
     JOIN roles ON employees.roles_id = roles.id
     JOIN department ON roles.department_id = department.id
-    JOIN employees em ON employees.manager_id = em.id`, function (err, res) {
+    LEFT JOIN employees em ON employees.manager_id = em.id`, function (err, res) {
         printTable(res);
         console.log(err);
     })
