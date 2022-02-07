@@ -37,6 +37,10 @@ function prompts (){
                     name: "Add Employee",
                     value: "Add_employee"
                 },
+                {
+                    name: "Quit",
+                    value: "Quit_program"
+                },
 
             ],  
         },
@@ -67,6 +71,11 @@ function prompts (){
             
             case "Add_employee":
                 Aemployee();
+            break ;   
+            
+            case "Quit_program":
+                console.log("Goodbye");
+                db.end();
             break ;    
         }
     } );
@@ -79,7 +88,8 @@ function Vdeparments (){
     FROM department`, function (err, res) {
         printTable(res);
         console.log(err);
-    })
+        prompts();
+    });
 };
 // display roles
 function Vroles (){ 
@@ -89,7 +99,8 @@ function Vroles (){
     JOIN department ON roles.department_id = department.id`, function (err, res) {
         printTable(res);
         console.log(err);
-    })
+        prompts();
+    });
 };
 // display employees
 function Vemployees (){ 
@@ -101,6 +112,7 @@ function Vemployees (){
     LEFT JOIN employees em ON employees.manager_id = em.id`, function (err, res) {
         printTable(res);
         console.log(err);
+        prompts();
     })
 };
 
