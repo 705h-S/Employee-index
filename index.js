@@ -10,7 +10,7 @@ function prompts (){
         {
             type:"list",
             name:"choice",
-            message: "What would you like to view?",
+            message: "What would you like to do?",
             choices:[
 
                 {
@@ -46,7 +46,6 @@ function prompts (){
         },
     ])
     .then ( answers =>{
-        console.log(answers);
         switch (answers.choice){
 
             case "View_deparments":
@@ -86,8 +85,10 @@ function Vdeparments (){
     db.query (
     `SELECT name as Deparments
     FROM department`, function (err, res) {
+        if(err){
+            console.log(err)
+        };
         printTable(res);
-        console.log(err);
         prompts();
     });
 };
@@ -97,8 +98,10 @@ function Vroles (){
     `SELECT roles.title, department.name AS Deparments, roles.salary  
     FROM roles
     JOIN department ON roles.department_id = department.id`, function (err, res) {
+        if(err){
+            console.log(err)
+        };
         printTable(res);
-        console.log(err);
         prompts();
     });
 };
@@ -110,10 +113,34 @@ function Vemployees (){
     JOIN roles ON employees.roles_id = roles.id
     JOIN department ON roles.department_id = department.id
     LEFT JOIN employees em ON employees.manager_id = em.id`, function (err, res) {
-        printTable(res);
-        console.log(err);
+        if(err){
+            console.log(err)
+        };
+        printTable(res); 
         prompts();
     })
+};
+// add department
+function Adeparment() {
+    
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "addingDep",
+            message: "What's the department you're adding?"
+        }
+        ])
+        .then(answers => {
+            db.query(
+                `INSERT INTO department (name)
+                VALUES ("${answers.addingDep}")`, function (err, res){
+                    if(err){
+                        console.log(err)
+                    };
+                    console.log(`Added ${answers.addingDep} to the list!`);
+                    Vdeparments();
+                });
+        });   
 };
 
 
