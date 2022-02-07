@@ -13,16 +13,32 @@ function prompts (){
             choices:[
 
                 {
-                    name: "View Deparments",
+                    name: "View all Deparments",
                     value: "View_deparments"
                 },
                 {
-                    name: "View Roles",
+                    name: "View all Roles",
                     value: "View_roles"
                 },
+                {
+                    name: "View all Employees",
+                    value:"View_employees"
+                },
+                {
+                    name: "Add Deparment",
+                    value: "Add_deparment"
+                },
+                {
+                    name: "Add Role",
+                    value: "Add_role"
+                },
+                {
+                    name: "Add Employee",
+                    value: "Add_employee"
+                },
 
-            ]
-        }
+            ],  
+        },
     ])
     .then ( answers =>{
         console.log(answers);
@@ -41,7 +57,7 @@ function prompts (){
     } );
 };
 
-
+// Functions after user selects option
 function Vdeparments (){ 
     db.query (
     "SELECT * FROM department", function (err, res) {
